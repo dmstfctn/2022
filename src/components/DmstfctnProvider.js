@@ -6,10 +6,10 @@ export const DmstfctnProvider = function({ children }){
     const breakpoint = 960;
     const [currentSlide, setCurrentSlide] = useState(0);    
     const [hovered, setHovered] = useState( -1 );
-    const [siteWidth, setSiteWidth] = useState(window.innerWidth);
+    const [siteWidth, setSiteWidth] = useState((typeof window !== `undefined`) ? window.innerWidth : breakpoint - 10 );
     
     useEffect(() => {
-        const handleResizeWindow = () => setSiteWidth(window.innerWidth);   
+        const handleResizeWindow = () => setSiteWidth((typeof window !== `undefined`) ? window.innerWidth : breakpoint - 10 );   
         window.addEventListener("resize", handleResizeWindow);
         return () => {
             window.removeEventListener("resize", handleResizeWindow);
