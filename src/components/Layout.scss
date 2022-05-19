@@ -1,0 +1,61 @@
+@font-face{
+    font-family: "DC-MAIN";
+    src: url("/assets/fonts/dc-main-subset.woff") format("woff");
+}
+
+html{
+    font-family: "DC-MAIN", adobe-myungjo-std, serif;
+    font-style: normal;
+    font-weight: 500;      
+    font-size: 25px;
+    font-size: 1.976vw;
+    line-height: 1.389em;
+    letter-spacing: -0.065em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+h1, h2, h3{
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0;
+    line-height: 1;
+}
+
+a{
+    color: #000000;
+    text-decoration: none;
+    &:hover{
+        color: #FF0000;
+    }
+}
+
+.dc-site{
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    justify-content: space-between;    
+}
+
+.dc-nav{
+    width: 100%;
+    flex-grow: 0;
+    display: flex;
+    justify-content: center;
+    h1{
+        margin: 0.4rem 0;
+    }
+}
+
