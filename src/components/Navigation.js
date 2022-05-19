@@ -4,11 +4,11 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { DmstfctnContext } from "../components/DmstfctnProvider"
 
 export const Navigation = ({items}) => {
-  const context = useContext( DmstfctnContext );
+  const context = useContext( DmstfctnContext );  
 
 	return (
 		<nav className="dc-slideshow-navigation">
-			{items.map( (item, i) => {
+			{(context.siteWidth >= context.breakpoint ) ? items.map( (item, i) => {
 				return (
 				<div 
           className={`item${(context.hovered === -1 && i === context.currentSlide) ? ' current' : ''}`}
@@ -31,7 +31,7 @@ export const Navigation = ({items}) => {
           />
 				</div>
 				)
-			})}
+			}) : false }
 		</nav>
 	)
 }
