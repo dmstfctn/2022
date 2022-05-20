@@ -2,32 +2,33 @@ import React, {useState, useEffect, useLayoutEffect, useRef} from "react"
 
 import "./Cv.scss"
 
-const CvEntry = React.forwardRef( ({data}, ref) => {
+const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
     return (
         <li 
+            className="cv-entry"
             style={{
                 display: "table-row"
             }}
             ref={ref}
-        >
+        >            
             <span 
                 className="dctxt--date"
                 style={{
                     display: "table-cell"
                 }}
             >
-                {data.year}
+                {year}
             </span>             
             <span 
-                className="dc-cv--type dc-cv--type__live"
+                className={`dc-cv--type dc-cv--type__${type}`}
                 style={{
                     display: "table-cell"
                 }}
             >
-                ({data.type})
+                {(type) ? `(${type})` : '' }
             </span>
             <div 
-                className="dc-cv--entry dc-cv-type__live dc-list-hoverimg"
+                className="dc-cv--entry"
                 style={{
                     display: "table-cell"
                 }}
@@ -39,9 +40,10 @@ const CvEntry = React.forwardRef( ({data}, ref) => {
                         justifyContent: "space-between"
                     }}
                 >
-                    <div className="dc-cv--name">
-                        {data.title}
-                    </div>
+                    <div 
+                        className="dc-cv--name"
+                        dangerouslySetInnerHTML={{__html: data.title}}
+                    />    
                     <div className="dc-cv--location">
                         {data.situation}, {data.location}
                     </div>
@@ -125,12 +127,16 @@ export const Cv = ({data}) => {
                 className="cv-contents"
                 ref={cvContents}
             >
-               {lines.map( ( entry ) => {                   
-                    return (<CvEntry 
-                        data={entry}
-                        ref={oneRow}
-                        key={entry.name}
-                    />)
+               {lines.map( ( entry, i ) => {                   
+                    return (
+                        <CvEntry 
+                            year={(lines[i-1] && entry.year !== lines[i-1].year || !lines[i-1]) ? entry.year : ''}
+                            type={(lines[i-1] && entry.type !== lines[i-1].type || !lines[i-1]) ? entry.type : ''}
+                            data={entry}
+                            ref={oneRow}
+                            key={entry.name}
+                        />
+                    )
                })}
             </ul>          
         </div>

@@ -10,4 +10,15 @@
         padding: 0;
         width: 100%;
     }
+    .cv-entry{
+        display: block;
+        .dctxt--date,
+        .dc-cv--type,
+        .dc-cv--entry,
+        .dc-cv--linewrap{
+            height: 1.2rem;
+            line-height: 1rem;
+            overflow: hidden;
+        }
+    }
 }
