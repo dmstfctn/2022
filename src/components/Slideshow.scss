@@ -94,6 +94,7 @@
     height: 0.6rem;
     display: flex;
     justify-content: space-between;
+    position: relative;
     .gatsby-image-wrapper{
         width: 110%;
         height: 100%;
@@ -101,13 +102,22 @@
     .item{
         flex-shrink: 1;
         flex-grow: 1;
-        &:hover,
-        &.current{
-            background-color: #FF0000;
-            .gatsby-image-wrapper{
-                opacity: 0;
-            }
-        }
+        cursor: pointer;
+        // &:hover,
+        // &.current{
+        //     background-color: #FF0000;
+        //     .gatsby-image-wrapper{
+        //         opacity: 0;
+        //     }
+        // }
+    }
+    .indicator{
+        background: #ff0000;
+        position: absolute;
+        z-index: 1;
+        pointer-events: none;
+        left: 0;
+        //transform: traslateX(100px);
     }
 }
 
