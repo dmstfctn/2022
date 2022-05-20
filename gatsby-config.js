@@ -9,6 +9,7 @@ module.exports = {
     "gatsby-plugin-sharp", 
     "gatsby-transformer-sharp", 
     "gatsby-plugin-react-helmet",
+    "gatsby-transformer-yaml",
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -23,6 +24,14 @@ module.exports = {
       options: {
         "name": "showcase",
         "path": "./src/showcase",
+        ignore: [`**/\.*`],
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "track-record",
+        "path": "./src/track-record",
         ignore: [`**/\.*`],
       }
     }

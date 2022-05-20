@@ -1,4 +1,4 @@
-- now: next
+- now: true
   description: An AI cheats its way out of a training simulation
   longdescription: A real-time rendered monologue about an AI cheating its way out of a simulation
   priority: 0
@@ -23,7 +23,8 @@
   location: 
   url: http://www.krisispublishing.com/prodotto/echo-fx/
   image: 
-  related: ECHO FX
+  related: 
+    - ECHO FX
 
 - now: false
 # longdescription: A livestream shopping event featuring conversation, sound and video work
@@ -37,7 +38,8 @@
 # url: https://www.twitch.tv/canal180
   url:
   image: dmstfctn_zero_hyperdub_flatlinepress.jpg
-  related: ECHO FX
+  related: 
+    - ECHO FX
 
 - now: false
   priority: 0
@@ -49,7 +51,8 @@
   location: london
   url: 
   image: interface-chaos-cafe-oto-sky-h1-live.jpg
-  related: Interface Chaos
+  related: 
+    - Interface Chaos
 
 - now: false
 # longdescription: A livestream shopping event featuring conversation, sound and video work
@@ -76,7 +79,8 @@
   location: 
   url: https://www.sleek-mag.com/article/echo-fx/
   image:
-  related: ECHO FX
+  related: 
+    - ECHO FX
   hideon: mobile
 
 - now: false
@@ -89,7 +93,8 @@
   location: berlin
   url: 
   image: echo-fx-berghain.jpg
-  related: ECHO FX
+  related: 
+    - ECHO FX
 
 # ## 2020 ## solo ############## #
 - now: false
@@ -117,7 +122,8 @@
   location: graz
   url: 
   image: interface-chaos-graz.jpg
-  related: Interface Chaos
+  related: 
+    - Interface Chaos
 
 - now: false
   longdescription: A panel on artistic explorations of tax havens, led by an investigative journalist
@@ -145,7 +151,8 @@
   location: 
   url: https://www.neroeditions.com/docs/interface-chaos/
   image:
-  related: Interface Chaos
+  related: 
+    - Interface Chaos
 
 - now: false
   longdescription: "'A group of artists began a project to show how money could be moved offshore'"
@@ -173,7 +180,8 @@
   location: london
   url: 
   image: Designing-Museum-Designing-Time.jpg
-  related: Network Ensemble
+  related: 
+    - Network Ensemble
 
 - now: false
   priority: 0
@@ -202,7 +210,8 @@
   location: genk
   url: 
   image: c-mine-school-of-school.jpg
-  related: OFFSHORESS18
+  related: 
+    - OFFSHORESS18
 
 - now: false
   priority: 0
@@ -214,7 +223,8 @@
   location: porto
   url: 
   image: chaos-of-interfaces-porto-biennale.jpg
-  related: A Chaos of Interfaces
+  related: 
+    - A Chaos of Interfaces
 
 - now: false
   priority: 0
@@ -226,7 +236,8 @@
   location: arles
   url: 
   image: school-of-schools-luma2.jpg
-  related: OFFSHORESS18
+  related: 
+    - OFFSHORESS18
 
 # ## 2019 ## screening ######## #    
 - now: false
@@ -239,7 +250,8 @@
   location: london
   url: 
   image: echo-fx-corsica-studios.jpg
-  related: ECHO FX
+  related: 
+    - ECHO FX
 
 - now: false
   priority: 0
@@ -278,7 +290,8 @@
   location: berlin
   url: 
   image: interface-chaos-discussion-trust.jpg
-  related: Interface Chaos
+  related: 
+    - Interface Chaos
 
 - now: false
   priority: 0
@@ -290,7 +303,8 @@
   location: london
   url: 
   image: Interface-Chaos-Antiuniversity.jpg
-  related: Interface Chaos
+  related: 
+    - Interface Chaos
 
 - now: false
   longdescription: Audiovisual genealogy of financial algorithmic collapse, released as a custom USB
@@ -318,7 +332,8 @@
   location: istanbul
   url: 
   image: offshore-ss18-istanbul-design-biennale.jpg
-  related: OFFSHORESS18
+  related: 
+    - OFFSHORESS18
   hideon: desktop
 
 - now: false
@@ -331,7 +346,8 @@
   location: istanbul
   url: 
   image: offshore-ss18-istanbul-design-biennale.jpg
-  related: OFFSHORESS18
+  related: 
+    - OFFSHORESS18
   hideon: mobile
 
 - now: false
@@ -359,7 +375,8 @@
   location: winterthur
   url: 
   image: demystification-committee-fotomuseum-winterthur.jpg
-  related: Network Study (I, VII, VIII)
+  related: 
+    - Network Study (I, VII, VIII)
 
 - now: false
   priority: 0
@@ -371,7 +388,8 @@
   location: berlin
   url: 
   image: demystification-committee-spektrum-radical-networks.jpg
-  related: Demons
+  related: 
+    - Demons
 
 - now: false
   priority: 0
@@ -397,7 +415,8 @@
   location: athens
   url: 
   image: demystification-committee-spektrum-onassis-stegi-borderline-festival.jpg
-  related: Network Ensemble
+  related: 
+    - Network Ensemble
   hideon: desktop
 
 - now: false
@@ -411,7 +430,8 @@
   location: athens
   url: https://youtu.be/2N871QqErpg?t=1037
   image: 
-  related: Network Ensemble
+  related: 
+     - Network Ensemble
   hideon: mobile
 
 # ## 2018 ## talk ############## #
@@ -473,7 +493,8 @@
   location: berlin
   url: https://youtu.be/IZCHoLp4U70?t=2260
   image: 
-  related: Offshore Investigation Vehicle
+  related: 
+    - Offshore Investigation Vehicle
   hideon: mobile
 
 - now: false
@@ -501,7 +522,8 @@
   location: london
   url: 
   image: demystification-committee-altage-design-museum.jpg
-  related: Flash
+  related: 
+    - Flash
 
   # ## 2018 ## dissemination ##### #
 - now: false
@@ -515,7 +537,8 @@
   location: 
   url: https://schloss-post.com/a-day-in-the-life-of/
   image:
-  related: OFFSHORESS18
+  related: 
+    - OFFSHORESS18
 
 # 2017  #
 - now: false
@@ -528,7 +551,8 @@
   location: barcelona
   url:
   image: cccb-demystification-committee-talk.jpg
-  related: OFFSHORESS18
+  related: 
+    - OFFSHORESS18
 
 - now: false
   priority: 0
