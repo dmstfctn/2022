@@ -6,40 +6,16 @@ const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
     return (
         <li 
             className="cv-entry"
-            style={{
-                display: "table-row"
-            }}
             ref={ref}
         >            
-            <span 
-                className="dctxt--date"
-                style={{
-                    display: "table-cell"
-                }}
-            >
+            <span className="dctxt--date">
                 {year}
             </span>             
-            <span 
-                className={`dc-cv--type dc-cv--type__${type}`}
-                style={{
-                    display: "table-cell"
-                }}
-            >
+            <span className={`dc-cv--type dc-cv--type__${type}`}>
                 {(type) ? `(${type})` : '' }
             </span>
-            <div 
-                className="dc-cv--entry"
-                style={{
-                    display: "table-cell"
-                }}
-            >
-                <span 
-                    className="dc-cv--linewrap"
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between"
-                    }}
-                >
+            <div className="dc-cv--entry">
+                <span className="dc-cv--linewrap">
                     <div 
                         className="dc-cv--name"
                         dangerouslySetInnerHTML={{__html: data.title}}

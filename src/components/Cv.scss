@@ -10,8 +10,14 @@
         padding: 0;
         width: 100%;
     }
-    .cv-entry{
-        display: block;
+    .cv-entry{        
+        display: table-row;
+
+        .dctxt--date,
+        .dc-cv--type,
+        .dc-cv--entry{
+            display: table-cell;
+        }
         .dctxt--date,
         .dc-cv--type,
         .dc-cv--entry,
@@ -19,6 +25,11 @@
             height: 1.2rem;
             line-height: 1rem;
             overflow: hidden;
+            white-space: nowrap;
+        }
+        .dc-cv--linewrap{
+            display: flex;
+            justify-content: space-between;
         }
     }
 }
