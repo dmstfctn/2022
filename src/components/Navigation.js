@@ -23,6 +23,7 @@ const NavigationItems = React.forwardRef( ({items}, ref) => {
               }}
               onMouseLeave={()=>{
                 context.setHovered( -1 );
+                //context.setJustUnhovered();
               }}
               ref={ref}            
             >
@@ -45,6 +46,7 @@ const NavigationItems = React.forwardRef( ({items}, ref) => {
               }}
               onMouseLeave={()=>{
                 context.setHovered( -1 );
+                //context.setJustUnhovered();
               }}                  
             >
               <GatsbyImage
@@ -67,8 +69,10 @@ export const Navigation = ({items}) => {
   const indicator = useRef();
 
   useEffect(() => {
+    console.log( context.justUnhovered );
+    //if( context.hovered === -1 && context.justUnhovered ){
     if( context.hovered === -1 ){
-      indicator.current.style.transition = 'transform .3s .2s ease-in-out';
+      indicator.current.style.transition = 'transform .3s .2s ease-out, width .3s .2s ease-out';
     } else {
       indicator.current.style.transition = 'none';
     }
@@ -76,8 +80,7 @@ export const Navigation = ({items}) => {
       const currentBounds = currentItem.current.getBoundingClientRect();
       console.log( `${currentBounds.x}px)` );
       indicator.current.style.display = 'block';
-      indicator.current.style.transform = `translateX(${currentBounds.x}px)`;
-      //indicator.current.style.left = `${currentBounds.x}px`;
+      indicator.current.style.transform = `translateX(${currentBounds.x}px)`;      
       indicator.current.style.width = `${currentBounds.width}px`;
       indicator.current.style.height = `${currentBounds.height}px`;
 
