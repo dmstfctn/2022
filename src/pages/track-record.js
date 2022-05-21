@@ -47,6 +47,9 @@ query DmstfctnCvQuery{
           location
           url
           image
+          hideon
+          priority
+          related
         }
       }
     }

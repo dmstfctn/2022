@@ -35,7 +35,7 @@
         .dc-cv--type,
         .dc-cv--entry,
         .dc-cv--linewrap{
-            height: 1.25em;
+            height: 1.25rem;
             line-height: 1rem;
             overflow: hidden;
             white-space: nowrap;            
@@ -60,7 +60,7 @@
         @media(max-width: 960px){
             display: flex;
             justify-content: space-between;
-            align-items: end;
+            align-items: flex-end;
 
             .dc-cv--entry{
                 flex-grow: 1;
@@ -79,7 +79,9 @@
                 display: none;
             }
             .dc-cv--date.visible{
-                margin-top: 1.25em;
+                margin-top: 1.25rem;
+                padding-top: 0.18em;
+                box-sizing: border-box;
             }
             &:first-child{
                 .dc-cv--date.visible{
@@ -92,7 +94,6 @@
         }
     }    
 }
-
 
 .dc-cv--date{    
     font-family: antique-olive-nord, sans-serif;

@@ -66,7 +66,18 @@ export const Cv = ({data}) => {
         data.years.forEach( ( yearData ) => {
             yearData.types.forEach( (typeData ) => {
                 typeData.entries.forEach( (entry) => {
-                    lines.push( entry );
+                    if( entry.hideon === "mobile" || entry.hideon === "desktop" ){
+                        if(context.siteWidth < context.breakpoint && entry.hideon !== "mobile" ){
+                            lines.push( entry );
+                        }
+                        if(context.siteWidth >= context.breakpoint && entry.hideon !== "desktop" ){
+                            lines.push( entry );
+                        }
+                    } else {
+                        lines.push( entry );
+                    }
+                   
+                   
                 })
             })
         });       
