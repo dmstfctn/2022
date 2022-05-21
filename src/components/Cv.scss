@@ -6,30 +6,100 @@
         position: absolute;
         top: 0;
         display: table;
+        table-layout: fixed;
         margin: 0;
         padding: 0;
         width: 100%;
+        box-sizing: border-box;
+        padding: 0 0.5rem;
     }
     .cv-entry{        
         display: table-row;
 
-        .dctxt--date,
+        .dc-cv--date,
         .dc-cv--type,
         .dc-cv--entry{
             display: table-cell;
         }
-        .dctxt--date,
+        .dc-cv--date{
+            width: 12%;
+        }
+        .dc-cv--type{
+            width: 16%;
+        }
+        .dc-cv--entry{
+            width: 72%;
+        }
+
+        .dc-cv--date,
         .dc-cv--type,
         .dc-cv--entry,
         .dc-cv--linewrap{
-            height: 1.2rem;
+            height: 1.25em;
             line-height: 1rem;
             overflow: hidden;
-            white-space: nowrap;
+            white-space: nowrap;            
         }
         .dc-cv--linewrap{
             display: flex;
             justify-content: space-between;
         }
-    }
+        .dc-cv--name{
+            text-transform: uppercase;    
+            flex-shrink: 1;
+            flex-grow: 0;       
+        }        
+        .dc-cv--location{
+            flex-shrink: 1;
+            flex-grow: 0;  
+        }
+        .dc-cv--dots{
+            flex-grow: 2;   
+            overflow: hidden;
+        }
+        @media(max-width: 960px){
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+
+            .dc-cv--entry{
+                flex-grow: 1;
+            }
+            .dc-cv--date,
+            .dc-cv--type,
+            .dc-cv--entry{
+                display: block;
+                width: auto;                
+            }
+            .dc-cv--date{
+                overflow: visible;
+                margin-right: .15em;
+            }
+            .dc-cv--date.hidden{
+                display: none;
+            }
+            .dc-cv--date.visible{
+                margin-top: 1.25em;
+            }
+            &:first-child{
+                .dc-cv--date.visible{
+                    margin-top: 0;
+                }
+            }
+            .dc-cv--type{
+                display: none;
+            }
+        }
+    }    
+}
+
+
+.dc-cv--date{    
+    font-family: antique-olive-nord, sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1em;
+    font-size: 0.85em; 
+    letter-spacing: -0.03em;
+    color: #FF0000;
 }

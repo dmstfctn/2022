@@ -1,6 +1,16 @@
-import React, {useState, useEffect, useLayoutEffect, useRef} from "react"
+import React, {useState, useEffect, useLayoutEffect, useRef, useContext} from "react"
+
+import { DmstfctnContext } from "./DmstfctnProvider"
 
 import "./Cv.scss"
+
+const dots = (()=>{
+    let str = '';
+    for( let i = 0; i < 500; i++ ){
+        str += '.';
+    }
+    return str;
+})();
 
 const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
     return (
@@ -8,10 +18,11 @@ const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
             className="cv-entry"
             ref={ref}
         >            
-            <span className="dctxt--date">
+            <span className={`dc-cv--date${(year) ? ' visible' : ' hidden'}`}>
                 {year}
+                {(data.now) ? `.${data.date}` : ''}
             </span>             
-            <span className={`dc-cv--type dc-cv--type__${type}`}>
+            <span className={`dc-cv--type dc-cv--type__${type}${(type) ? ' visible' : ' hidden'}`}>
                 {(type) ? `(${type})` : '' }
             </span>
             <div className="dc-cv--entry">
@@ -19,9 +30,13 @@ const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
                     <div 
                         className="dc-cv--name"
                         dangerouslySetInnerHTML={{__html: data.title}}
-                    />    
+                    />
+                    <span className="dc-cv--dots">
+                        {dots}
+                    </span>
                     <div className="dc-cv--location">
-                        {data.situation}, {data.location}
+                        {data.situation}
+                        {(data.location) ? `, ${data.location}` : ''}
                     </div>
                     <img 
                         src={data.image} 
@@ -36,7 +51,7 @@ const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
 })
 
 export const Cv = ({data}) => {
-    //const [lineOffset, setLineOffset] = useState(0);
+    const context = useContext( DmstfctnContext ); 
     const [prevTouchY, setPrevTouchY] = useState(0);
     const [scrollAmount, setScrollAmount] = useState(0);
     const panelHeight = useRef(0);
@@ -57,13 +72,16 @@ export const Cv = ({data}) => {
         });       
         return lines.reverse();
     })();
+    const yearCount = data.years.length;
+    const mobileGapCount = yearCount - 1;
     
     useLayoutEffect(() => {
         if( !oneRow.current ){ return }
         const _panelHeight = cvPanel.current.getBoundingClientRect().height;
         const _lineHeight = oneRow.current.getBoundingClientRect().height;
-        const maxVisible = Math.floor( _panelHeight / _lineHeight );                
-        const maxOffset = lines.length - maxVisible;
+        const maxVisible = Math.floor( _panelHeight / _lineHeight );
+        const totalLines = (context.siteWidth < context.breakpoint ) ? lines.length + mobileGapCount : lines.length;
+        const maxOffset = totalLines - maxVisible;
         const minOffset = 0;
         panelHeight.current = _panelHeight;
         lineHeight.current = _lineHeight;

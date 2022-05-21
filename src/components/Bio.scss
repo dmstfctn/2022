@@ -1,0 +1,11 @@
+.dc-bio{
+    padding: 0 0.5rem 0.8rem;
+    box-sizing: border-box;
+    text-align: justify;
+    text-align-last: justify;
+    @media(max-width: 960px){
+        padding-top: 1.5rem;
+        text-align: center;
+        text-align-last: center;
+    }
+}

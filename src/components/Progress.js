@@ -1,7 +1,4 @@
-import React, {useContext, useState} from "react"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-
-import { DmstfctnContext } from "./DmstfctnProvider"
+import * as React from "react"
 
 export const Progress = ({current, total}) => {
  
