@@ -7,10 +7,10 @@ export const DmstfctnProvider = function({ children }){
     const [currentSlide, setCurrentSlide] = useState(0);    
     const [hovered, setHovered] = useState( -1 );
     const [justUnhovered, setJustUnhovered] = useState( false );    
-    const [siteWidth, setSiteWidth] = useState((typeof window !== `undefined`) ? window.innerWidth : breakpoint - 10 );
+    const [siteWidth, setSiteWidth] = useState((typeof window !== `undefined`) ? window.innerWidth : breakpoint + 10 );
 
     useEffect(() => {
-        const handleResizeWindow = () => setSiteWidth((typeof window !== `undefined`) ? window.innerWidth : breakpoint - 10 );   
+        const handleResizeWindow = () => setSiteWidth((typeof window !== `undefined`) ? window.innerWidth : breakpoint + 10 );   
         window.addEventListener( "resize", handleResizeWindow );
         return () => {
             window.removeEventListener( "resize", handleResizeWindow );

@@ -20,6 +20,12 @@
         width: 100%;     
         color: transparent; 
     }
+    img{
+        object-fit: cover !important;
+        @media (min-width: 960px){
+            object-fit: contain !important;
+        }
+    }
     .slideshow-ctrl{
         cursor: none;
         position: absolute;

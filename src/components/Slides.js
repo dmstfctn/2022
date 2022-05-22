@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react"
+import React, {useState, useContext, useEffect} from "react"
 import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
 
 import { DmstfctnContext } from "../components/DmstfctnProvider"
@@ -44,6 +44,11 @@ export const Slides = ({
     onChange
 }) => {
     const context = useContext( DmstfctnContext );  
+    const [isSmallSite, setIsSmallSite] = useState( context.siteWidth < context.breakpoint );
+
+    useEffect( () => {
+        setIsSmallSite( context.siteWidth < context.breakpoint );
+    }, [] )
 
     return (
         <div         
@@ -69,7 +74,7 @@ export const Slides = ({
                         image: getImage( currentSmall.mainImage )
                     }]
                 )}
-                objectFit={(context.siteWidth >= context.breakpoint) ? "contain" : "cover"}
+                //objectFit={(isSmallSite) ? "cover" : "contain"}
                 loading="eager"
                 alt={currentAlt}
             />
@@ -83,7 +88,7 @@ export const Slides = ({
                         image: getImage( prevSmall.mainImage )
                     }]
                 )}
-                objectFit={(context.siteWidth >= context.breakpoint) ? "contain" : "cover"}
+                //objectFit={(isSmallSite) ? "cover" : "contain"}
                 loading="lazy"
                 alt=""
             />
@@ -96,7 +101,7 @@ export const Slides = ({
                         image: getImage( prevPrevSmall.mainImage )
                     }]
                 )}
-                objectFit={(context.siteWidth >= context.breakpoint) ? "contain" : "cover"}
+                //objectFit={(isSmallSite) ? "cover" : "contain"}
                 loading="lazy"
                 alt=""
             />
@@ -109,7 +114,7 @@ export const Slides = ({
                         image: getImage( nextSmall.mainImage )
                     }]
                 )}
-                objectFit={(context.siteWidth >= context.breakpoint) ? "contain" : "cover"}
+                //objectFit={(isSmallSite) ? "cover" : "contain"}
                 loading="lazy"
                 alt=""
             />
@@ -122,7 +127,7 @@ export const Slides = ({
                         image: getImage( nextNextSmall.mainImage )
                     }]
                 )}
-                objectFit={(context.siteWidth >= context.breakpoint) ? "contain" : "cover"}
+                //objectFit={(isSmallSite) ? "cover" : "contain"}
                 loading="lazy"
                 alt=""
             />
