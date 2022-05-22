@@ -62,24 +62,23 @@ export const Cv = ({data}) => {
     const cvPanel = useRef();
     const cvContents = useRef();
     const lines = (() => {
-        const lines = [];
+        let lines = [];
         data.years.forEach( ( yearData ) => {
-            yearData.types.forEach( (typeData ) => {
-                typeData.entries.forEach( (entry) => {
-                    if( entry.hideon === "mobile" || entry.hideon === "desktop" ){
-                        if(context.siteWidth < context.breakpoint && entry.hideon !== "mobile" ){
-                            lines.push( entry );
-                        }
-                        if(context.siteWidth >= context.breakpoint && entry.hideon !== "desktop" ){
-                            lines.push( entry );
-                        }
-                    } else {
-                        lines.push( entry );
+            const yearLines = [];
+            yearData.entries.forEach( (entry) => {
+                if( entry.hideon === "mobile" || entry.hideon === "desktop" ){
+                    if(context.siteWidth < context.breakpoint && entry.hideon !== "mobile" ){
+                        yearLines.push( entry );
                     }
-                   
-                   
-                })
-            })
+                    if(context.siteWidth >= context.breakpoint && entry.hideon !== "desktop" ){
+                        yearLines.push( entry );
+                    }
+                } else {
+                    yearLines.push( entry );
+                } 
+            });
+            yearLines.reverse();
+            lines = lines.concat( yearLines );
         });       
         return lines.reverse();
     })();

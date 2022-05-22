@@ -28,30 +28,28 @@ const TrackRecordPage = ({data}) => {
 export default TrackRecordPage
 
 export const query = graphql`
-query DmstfctnCvQuery{
-  cv: allCvYaml {
+query DmstfctnCvQuery {
+  cv: allCvYaml(sort: {fields: year, order: DESC}) {
     years: group(field: year) {
       year: fieldValue
-      types: group(field: type) {
-        type: fieldValue
-        entries: nodes {
-          type
-          year
-          now
-          description
-          longdescription
-          date
-          title
-          description
-          situation
-          location
-          url
-          image
-          hideon
-          priority
-          related
-        }
+      entries: nodes {
+        type
+        year
+        now
+        description
+        longdescription
+        date
+        title
+        description
+        situation
+        location
+        url
+        image
+        hideon
+        priority
+        related
       }
     }
   }
-}`
+}
+`
