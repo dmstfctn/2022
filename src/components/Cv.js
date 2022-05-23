@@ -1,4 +1,6 @@
 import React, {useState, useEffect, useLayoutEffect, useRef, useContext} from "react"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+
 
 import { DmstfctnContext } from "./DmstfctnProvider"
 
@@ -49,10 +51,13 @@ const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
                             {(data.location) ? `, ${data.location}` : ''}
                         </div>
                         {(isHovered && data.image) ? 
-                            <img 
-                                src={data.image}                           
+                            <GatsbyImage 
+                                className="dc-cv--img"
+                                image={ getImage( data.image ) }
+                                loading="eager"
+                                objectFit="contain"
                             />
-                            :<></>
+                            : ''
                         }
                     </span>
                 </ConditionalCvLink>
@@ -65,13 +70,15 @@ export const Cv = ({data}) => {
     const context = useContext( DmstfctnContext ); 
     const [prevTouchY, setPrevTouchY] = useState(0);
     const [scrollAmount, setScrollAmount] = useState(0);
+    const [hasBeenScrolled, setHasBeenScrolled] = useState( false );
     const panelHeight = useRef(0);
     const lineHeight = useRef(0);
     const minmaxOffset = useRef({min: 0, max: 0});
     const minmaxScroll = useRef({min: 0, max: 0});
     const oneRow = useRef();
     const cvPanel = useRef();
-    const cvContents = useRef();
+    const cvContents = useRef();    
+
     const lines = (() => {
         let lines = [];
         data.years.forEach( ( yearData ) => {
@@ -119,12 +126,16 @@ export const Cv = ({data}) => {
             offset = minmaxOffset.current.min;            
         }
         
+        if( offset > minmaxOffset.current.min ){
+            setHasBeenScrolled( true );
+        }
+
         cvContents.current.style.transform = `translateY(-${offset * lineHeight.current}px)`;
     }, [scrollAmount, lines, panelHeight.current, lineHeight.current, minmaxOffset.current] )
 
     return(
         <div 
-            className="dc-cv"
+            className={`dc-cv${(hasBeenScrolled) ? '' : ' unscrolled'}`}
             onWheel={ (e) => {
                 setScrollAmount( ( prev ) => Math.min( Math.max( prev + e.deltaY, minmaxScroll.current.min ), minmaxScroll.current.max ) );
             }}
@@ -132,7 +143,7 @@ export const Cv = ({data}) => {
                 setPrevTouchY( e.changedTouches[0].pageY )
             }}
             onTouchMove={ (e) => {
-                const deltaY = prevTouchY - e.changedTouches[0].pageY;
+                const deltaY = prevTouchY - e.changedTouches[0].pageY;                
                 setScrollAmount( (prev) => Math.min( Math.max( prev + deltaY, minmaxScroll.current.min ), minmaxScroll.current.max ) );
                 setPrevTouchY( e.changedTouches[0].pageY )
             }}

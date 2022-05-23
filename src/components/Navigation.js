@@ -8,8 +8,7 @@ const NavigationItems = React.forwardRef( ({items}, ref) => {
   
   return (
     (context.siteWidth >= context.breakpoint ) 
-      ? items.map( (item, i) => {
-        console.log( i === context.currentSlide );
+      ? items.map( (item, i) => {        
         return (
           ( (context.hovered > -1) ? i === context.hovered : i === context.currentSlide ) ? 
             <div 
@@ -23,7 +22,6 @@ const NavigationItems = React.forwardRef( ({items}, ref) => {
               }}
               onMouseLeave={()=>{
                 context.setHovered( -1 );
-                //context.setJustUnhovered();
               }}
               ref={ref}            
             >
@@ -40,14 +38,13 @@ const NavigationItems = React.forwardRef( ({items}, ref) => {
               key={item.name}
               onClick={() => {            
                 context.setCurrentSlide( i )
-              }}
+              }}       
               onMouseEnter={()=>{
                 context.setHovered( i );
               }}
               onMouseLeave={()=>{
                 context.setHovered( -1 );
-                //context.setJustUnhovered();
-              }}                  
+              }}         
             >
               <GatsbyImage
                 alt=""
@@ -68,17 +65,14 @@ export const Navigation = ({items}) => {
   const currentItem = useRef();
   const indicator = useRef();
 
-  useEffect(() => {
-    console.log( context.justUnhovered );
-    //if( context.hovered === -1 && context.justUnhovered ){
-    if( context.hovered === -1 ){
-      indicator.current.style.transition = 'transform .3s .2s ease-out, width .3s .2s ease-out';
+  useEffect(() => {    
+    if( context.justUnhovered ){
+      indicator.current.style.transition = 'transform .3s ease-out, width .3s ease-out';
     } else {
       indicator.current.style.transition = 'none';
     }
     if( currentItem.current ){
       const currentBounds = currentItem.current.getBoundingClientRect();
-      console.log( `${currentBounds.x}px)` );
       indicator.current.style.display = 'block';
       indicator.current.style.transform = `translateX(${currentBounds.x}px)`;      
       indicator.current.style.width = `${currentBounds.width}px`;
@@ -87,10 +81,15 @@ export const Navigation = ({items}) => {
     } else {
       indicator.current.style.display = 'none';
     }  
-  }, [currentItem.current] );
+  }, [currentItem.current, context.hovered] );
 
 	return (
-		<nav className="dc-slideshow-navigation">
+		<nav 
+      className="dc-slideshow-navigation"      
+      onMouseLeave={()=>{      
+        context.setJustUnhovered();
+      }}  
+    >
       <div 
         className="indicator"
         ref={indicator}

@@ -2,6 +2,18 @@
     flex-grow: 1;
     position: relative;
     overflow: hidden;
+    &.unscrolled::after{
+        content: '↓';
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        height: 1.25rem;
+        background: black;
+        width: 100%;
+        display: block;
+        font-size: 0.65rem;
+        line-height: 0.8rem;
+    }
     .cv-contents{
         position: absolute;
         top: 0;
@@ -13,7 +25,8 @@
         box-sizing: border-box;
         padding: 0 0.5rem;
     }
-    .cv-entry{        
+    .cv-entry{      
+        position: relative;  
         display: table-row;
         .dc-cv--date,
         .dc-cv--type,
@@ -35,9 +48,11 @@
         .dc-cv--entry,
         .dc-cv--linewrap{
             height: 1.25rem;
-            line-height: 1rem;
-            overflow: hidden;
+            line-height: 1rem;            
             white-space: nowrap;            
+        }
+        .dc-cv--type{
+            overflow: hidden;
         }
         .dc-cv--date{
             overflow: visible;
@@ -49,6 +64,10 @@
             display: flex;
             justify-content: space-between;
             position: relative;
+            overflow: visible;
+        }
+        .dc-cv--entry{
+            overflow: visible;
         }
         .dc-cv--name{
             text-transform: uppercase;    
@@ -64,14 +83,18 @@
             overflow: hidden;
         }
 
-        img{
+        .dc-cv--img{
             position: absolute;
             top: 100%;
             left: 50%;
             transform: translateX(-50%);
-            width: 33%;
-            height: auto;
-            outline: 1px solid yellow;
+            z-index: 20;
+            pointer-events: none;
+        //     width: 100%;
+        //     height: 33vh;
+        //     img{
+        //         object-fit: contain;
+        //     }
         }
         .dc-cv--entry > a{
             .dc-cv--linewrap::after{
@@ -114,6 +137,10 @@
             }
             .dc-cv--type{
                 display: none;
+            }
+            .dc-cv--entry,
+            .dc-cv--linewrap{
+                overflow: hidden;
             }
         }
     }    

@@ -15,7 +15,12 @@ const TrackRecordPage = ({data}) => {
         >
           <Helmet bodyAttributes={{ class: 'page--track-record' }} />
           <div className="dc-track-record">
-            <Bio />
+            <Bio 
+              large={data.bio.nodes[0].frontmatter.largeBio}
+              small={data.bio.nodes[0].frontmatter.smallBio}
+              mail={data.bio.nodes[0].frontmatter.mail}
+              handle={data.bio.nodes[0].frontmatter.handle}
+            />
             <Cv
               data={data.cv}
             />
@@ -44,10 +49,32 @@ query DmstfctnCvQuery {
         situation
         location
         url
-        image
+        image{
+          childImageSharp {
+            gatsbyImageData(
+              height: 800
+              placeholder: NONE
+              formats: [AUTO, WEBP, AVIF]
+              tracedSVGOptions: {
+                color: "#FF0000"
+              }
+            )
+          }
+        }
         hideon
         priority
         related
+      }
+    }
+  }
+  bio: allMarkdownRemark(filter: {fileAbsolutePath: {regex: "/track-record/"}}) {
+    nodes {
+      html
+      frontmatter {
+        mail
+        handle
+        smallBio
+        largeBio
       }
     }
   }
