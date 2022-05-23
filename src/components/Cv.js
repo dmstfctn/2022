@@ -12,7 +12,12 @@ const dots = (()=>{
     return str;
 })();
 
+const ConditionalCvLink = ({url, children }) => (url) ? <a href={url}>{children}</a> : children;
+
+
 const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
         <li 
             className="cv-entry"
@@ -25,26 +30,32 @@ const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
             <span className={`dc-cv--type dc-cv--type__${type}${(type) ? ' visible' : ' hidden'}`}>
                 {(type) ? `(${type})` : '' }
             </span>
-            <div className="dc-cv--entry">
-                <span className="dc-cv--linewrap">
-                    <div 
-                        className="dc-cv--name"
-                        dangerouslySetInnerHTML={{__html: data.title}}
-                    />
-                    <span className="dc-cv--dots">
-                        {dots}
+            <div 
+                className="dc-cv--entry"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <ConditionalCvLink url={data.url}>
+                    <span className="dc-cv--linewrap">
+                        <div 
+                            className="dc-cv--name"
+                            dangerouslySetInnerHTML={{__html: data.title}}
+                        />
+                        <span className="dc-cv--dots">
+                            {dots}
+                        </span>
+                        <div className="dc-cv--location">
+                            {data.situation}
+                            {(data.location) ? `, ${data.location}` : ''}
+                        </div>
+                        {(isHovered && data.image) ? 
+                            <img 
+                                src={data.image}                           
+                            />
+                            :<></>
+                        }
                     </span>
-                    <div className="dc-cv--location">
-                        {data.situation}
-                        {(data.location) ? `, ${data.location}` : ''}
-                    </div>
-                    <img 
-                        src={data.image} 
-                        style={{
-                            display: "none"
-                        }}
-                    />
-                </span>
+                </ConditionalCvLink>
             </div>
         </li>
     )
