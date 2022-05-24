@@ -16,7 +16,7 @@ const IndexPage = ({data}) => {
     const hashToNum = (typeof window !== 'undefined') ? parseInt( window.location.hash.replace('#','')) : false;
     const startPoint = (hashToNum) ? hashToNum - 1 : 0;
     context.setCurrentSlide( startPoint );
-      window.location.hash = null;
+    window.location.hash = '';
   },[])
 
   return (  
