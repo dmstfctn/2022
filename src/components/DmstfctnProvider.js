@@ -30,10 +30,7 @@ export const DmstfctnProvider = function({ children }){
         <DmstfctnContext.Provider
             value={{
                 currentSlide,
-                setCurrentSlide: ( to ) => {
-                    setCurrentSlide( to )
-                    window.location.hash = '#' + to;
-                },
+                setCurrentSlide: ( to ) => setCurrentSlide( to ),
                 hovered,                
                 setHovered: ( to ) => setHovered( to ) ,
                 justUnhovered,

@@ -89,6 +89,10 @@
         margin: 0.4rem 0.5rem;
         line-height: 1;
         color: #FF0000;
+        a:hover{
+            cursor: default;
+            color: inherit;
+        }
     }
     a{
         pointer-events: none;
