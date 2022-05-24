@@ -1,7 +1,8 @@
-import * as React from "react"
+import React, {useContext, useEffect}  from "react"
 import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
+import { DmstfctnContext } from "../components/DmstfctnProvider"
 
 import { Layout } from '../components/Layout'
 import { Slideshow } from "../components/Slideshow"
@@ -9,7 +10,15 @@ import { Slideshow } from "../components/Slideshow"
 import slideshowMeta from "../showcase/meta.yaml"
 
 const IndexPage = ({data}) => {
+  const context = useContext( DmstfctnContext );  
   
+  useEffect(()=>{
+    const hashToNum = (typeof window !== 'undefined') ? parseInt( window.location.hash.replace('#','')) : false;
+    const startPoint = (hashToNum) ? hashToNum - 1 : 0;
+    context.setCurrentSlide( startPoint );
+    // window.location.hash = '';
+  },[])
+
   return (  
     <Layout
       navLink="/track-record"

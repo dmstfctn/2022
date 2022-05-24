@@ -17,9 +17,10 @@ const dots = (()=>{
 const ConditionalCvLink = ({url, children }) => (url) ? <a href={url}>{children}</a> : children;
 
 
-const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
+const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
     const [isHovered, setIsHovered] = useState(false);
-
+    const imgRatio = (data.image) ? data.image.childImageSharp.gatsbyImageData.height / data.image.childImageSharp.gatsbyImageData.width : false;
+    
     return (
         <li 
             className="cv-entry"
@@ -52,12 +53,13 @@ const CvEntry = React.forwardRef( ({data, year, type}, ref) => {
                         </div>
                         {(isHovered && data.image) ? 
                             <GatsbyImage 
-                                className="dc-cv--img"
+                                className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
                                 image={ getImage( data.image ) }
                                 loading="eager"
                                 objectFit="contain"
+                                alt=""
                             />
-                            : ''
+                            : false
                         }
                     </span>
                 </ConditionalCvLink>
@@ -71,6 +73,8 @@ export const Cv = ({data}) => {
     const [prevTouchY, setPrevTouchY] = useState(0);
     const [scrollAmount, setScrollAmount] = useState(0);
     const [hasBeenScrolled, setHasBeenScrolled] = useState( false );
+    const offsetLineCount = useRef(0);
+    const maxVisibleLines = useRef(0);
     const panelHeight = useRef(0);
     const lineHeight = useRef(0);
     const minmaxOffset = useRef({min: 0, max: 0});
@@ -107,10 +111,11 @@ export const Cv = ({data}) => {
         if( !oneRow.current ){ return }
         const _panelHeight = cvPanel.current.getBoundingClientRect().height;
         const _lineHeight = oneRow.current.getBoundingClientRect().height;
-        const maxVisible = Math.floor( _panelHeight / _lineHeight );
+        const _maxVisible = Math.floor( _panelHeight / _lineHeight );
         const totalLines = (context.siteWidth < context.breakpoint ) ? lines.length + mobileGapCount : lines.length;
-        const maxOffset = totalLines - maxVisible;
+        const maxOffset = totalLines - _maxVisible;
         const minOffset = 0;
+        maxVisibleLines.current = _maxVisible;
         panelHeight.current = _panelHeight;
         lineHeight.current = _lineHeight;
         minmaxOffset.current = { min: minOffset, max: maxOffset };
@@ -129,6 +134,8 @@ export const Cv = ({data}) => {
         if( offset > minmaxOffset.current.min ){
             setHasBeenScrolled( true );
         }
+
+        offsetLineCount.current = offset;
 
         cvContents.current.style.transform = `translateY(-${offset * lineHeight.current}px)`;
     }, [scrollAmount, lines, panelHeight.current, lineHeight.current, minmaxOffset.current] )
@@ -155,12 +162,13 @@ export const Cv = ({data}) => {
             >
                {lines.map( ( entry, i ) => {                   
                     return (
-                        <CvEntry 
+                        <CvEntry                       
                             year={(lines[i-1] && entry.year !== lines[i-1].year || !lines[i-1]) ? entry.year : ''}
                             type={(lines[i-1] && entry.type !== lines[i-1].type || !lines[i-1]) ? entry.type : ''}
                             data={entry}
                             ref={oneRow}
                             key={entry.name}
+                            inLowerThird={( i < (offsetLineCount.current + maxVisibleLines.current) && i > offsetLineCount.current + (maxVisibleLines.current*0.6) ) ? true : false }
                         />
                     )
                })}

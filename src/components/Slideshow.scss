@@ -26,8 +26,7 @@
             object-fit: contain !important;
         }
     }
-    .slideshow-ctrl{
-        cursor: none;
+    .slideshow-ctrl{       
         position: absolute;
         left: 0;
         top: 0;
@@ -38,6 +37,8 @@
         border: none;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
         -webkit-user-select: none;
+        font-family: inherit;
+        font-size: inherit;
         &:active{
             background-color: transparent;
         }
@@ -50,7 +51,9 @@
             position: fixed;
             opacity: 0;
             pointer-events: none;
-            display: none;
+            display: none;    
+            color: #FF0000;
+            
         }
 
         &:hover{
@@ -59,6 +62,7 @@
             }
         }
         @media (min-width: 960px){
+            cursor: none;
             .ctrl-text{
                 display: block;
             }
@@ -78,20 +82,27 @@
         margin: 0.4rem 0;
         -webkit-user-select: none;
     }
-    .numbers{
-        display: none;
+    .numbers{        
         position: absolute;
         left: 0;
         top: 0;
         margin: 0.4rem 0.5rem;
         line-height: 1;
+        color: #FF0000;
+    }
+    a{
+        pointer-events: none;
     }
     @media (min-width: 960px){
         position: relative; 
         bottom: auto; 
         .numbers{
             display: block;
+            color: #000000;
         }     
+        a{
+            pointer-events: all;
+        }
     }
 }
 

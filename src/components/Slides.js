@@ -57,12 +57,12 @@ export const Slides = ({
             <SlideshowControl
                 className="ctrl-prev"
                 onClick={() => onChange( -1 )}
-                text="&larr;"
+                text="prev"
             />
             <SlideshowControl
                 className="ctrl-next"
                 onClick={() => onChange( 1 )}
-                text="&rarr;"
+                text="next"
             />            
 
             <GatsbyImage 
