@@ -18,8 +18,7 @@ const ConditionalCvLink = ({url, children }) => (url) ? <a href={url}>{children}
 
 
 const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
-    const [isHovered, setIsHovered] = useState(false);
-    const imgRatio = (data.image) ? data.image.childImageSharp.gatsbyImageData.height / data.image.childImageSharp.gatsbyImageData.width : false;
+    const [isHovered, setIsHovered] = useState(false);    
     
     return (
         <li 
@@ -109,6 +108,7 @@ export const Cv = ({data}) => {
     
     useLayoutEffect(() => {
         if( !oneRow.current ){ return }
+        if( !cvPanel.current ){ return }
         const _panelHeight = cvPanel.current.getBoundingClientRect().height;
         const _lineHeight = oneRow.current.getBoundingClientRect().height;
         const _maxVisible = Math.floor( _panelHeight / _lineHeight );
@@ -122,7 +122,8 @@ export const Cv = ({data}) => {
         minmaxScroll.current = {min: minOffset * _lineHeight, max: maxOffset * _lineHeight };
     });
 
-    useEffect(()=>{        
+    useEffect(()=>{       
+        if( !cvContents.current ){ return } 
         let offset = Math.floor( scrollAmount / lineHeight.current );
         
         if( offset >= minmaxOffset.current.max ){
@@ -138,7 +139,7 @@ export const Cv = ({data}) => {
         offsetLineCount.current = offset;
 
         cvContents.current.style.transform = `translateY(-${offset * lineHeight.current}px)`;
-    }, [scrollAmount, lines, panelHeight.current, lineHeight.current, minmaxOffset.current] )
+    }, [scrollAmount, lines] )
 
     return(
         <div 
@@ -163,8 +164,8 @@ export const Cv = ({data}) => {
                {lines.map( ( entry, i ) => {                   
                     return (
                         <CvEntry                       
-                            year={(lines[i-1] && entry.year !== lines[i-1].year || !lines[i-1]) ? entry.year : ''}
-                            type={(lines[i-1] && entry.type !== lines[i-1].type || !lines[i-1]) ? entry.type : ''}
+                            year={( (lines[i-1] && entry.year !== lines[i-1].year) || !lines[i-1]) ? entry.year : ''}
+                            type={( (lines[i-1] && entry.type !== lines[i-1].type) || !lines[i-1]) ? entry.type : ''}
                             data={entry}
                             ref={oneRow}
                             key={`${entry.type}-${entry.title}-${entry.situation}-${(entry.hideon === 'mobile') ? 'lrg' : 'norm'}`}
