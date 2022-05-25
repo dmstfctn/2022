@@ -82,10 +82,11 @@ export const Cv = ({data}) => {
     const [prevTouchY, setPrevTouchY] = useState(0);
     const [scrollAmount, setScrollAmount] = useState(0);
     const [hasBeenScrolled, setHasBeenScrolled] = useState( false );
-    const offsetLineCount = useRef(0);
-    const maxVisibleLines = useRef(0);
-    const panelHeight = useRef(0);
-    const lineHeight = useRef(0);
+    const [alignImageAboveThresh, setAlignImageAboveThresh] = useState( 0 )
+    const [offsetLineCount, setOffsetLineCount] = useState(0);
+    const maxVisibleLines = useRef( 0 );
+    const panelHeight = useRef( 0 );
+    const lineHeight = useRef( 1 );
     const minmaxOffset = useRef({min: 0, max: 0});
     const minmaxScroll = useRef({min: 0, max: 0});
     const oneRow = useRef();
@@ -120,7 +121,11 @@ export const Cv = ({data}) => {
     const yearCount = data.years.length;
     const mobileGapCount = yearCount - 1;
     
-    
+    const calculateImageAlignThreshold = () => {
+        console.log( offsetLineCount, maxVisibleLines.current );
+        setAlignImageAboveThresh( offsetLineCount + (maxVisibleLines.current*0.6) );
+    }
+
     useEffect(() => {
         const handleResizeWindow = () => setLines( calculateLines() );   
         window.addEventListener( "resize", handleResizeWindow );
@@ -130,7 +135,7 @@ export const Cv = ({data}) => {
         }
     }, []);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if( !oneRow.current ){ return }
         if( !cvPanel.current ){ return }
         const _panelHeight = cvPanel.current.getBoundingClientRect().height;
@@ -144,6 +149,7 @@ export const Cv = ({data}) => {
         lineHeight.current = _lineHeight;
         minmaxOffset.current = { min: minOffset, max: maxOffset };
         minmaxScroll.current = {min: minOffset * _lineHeight, max: maxOffset * _lineHeight };
+        //calculateImageAlignThreshold();
     });
 
     useEffect(()=>{       
@@ -160,10 +166,16 @@ export const Cv = ({data}) => {
             setHasBeenScrolled( true );
         }
 
-        offsetLineCount.current = offset;
+        setOffsetLineCount( offset );
 
         cvContents.current.style.transform = `translateY(-${offset * lineHeight.current}px)`;
+        // calculateImageAlignThreshold();
     }, [scrollAmount] )
+
+    useEffect(() =>{
+        console.log( 'calculateImageAlignThreshold()' );
+        calculateImageAlignThreshold();
+    })
 
     return(
         <div 
@@ -193,7 +205,7 @@ export const Cv = ({data}) => {
                             data={entry}
                             ref={oneRow}
                             key={entry.id}
-                            inLowerThird={( i < (offsetLineCount.current + maxVisibleLines.current) && i > offsetLineCount.current + (maxVisibleLines.current*0.6) ) ? true : false }
+                            inLowerThird={(i > alignImageAboveThresh ) ? true : false }
                         />
                     )
                })}
