@@ -67,7 +67,8 @@ export const Navigation = ({items}) => {
 
   useEffect(() => {    
     if( context.justUnhovered ){
-      indicator.current.style.transition = 'transform .5s ease-out, width .5s ease-out';
+      //indicator.current.style.transition = 'transform .5s ease-out, width .5s ease-out';
+      indicator.current.style.transition = 'none';
     } else {
       indicator.current.style.transition = 'none';
     }
