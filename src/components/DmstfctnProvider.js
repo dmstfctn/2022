@@ -12,6 +12,7 @@ export const DmstfctnProvider = function({ children }){
     useEffect(() => {
         const handleResizeWindow = () => setSiteWidth((typeof window !== `undefined`) ? window.innerWidth : breakpoint + 10 );   
         window.addEventListener( "resize", handleResizeWindow );
+        handleResizeWindow();
         return () => {
             window.removeEventListener( "resize", handleResizeWindow );
         }

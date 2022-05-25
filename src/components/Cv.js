@@ -19,7 +19,7 @@ const ConditionalCvLink = ({url, children }) => (url) ? <a href={url}>{children}
 
 const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
     const [isHovered, setIsHovered] = useState(false);    
-    
+
     return (
         <li 
             className={`cv-entry${(data.now) ? ' now' : ''}`}
@@ -63,8 +63,10 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
                                 src={data.image.publicURL} 
                                 loading="lazy"
                                 style={{
-                                    display: (isHovered) ? 'block' : 'none'
+                                    pointerEvents: 'none',
+                                    opacity: (isHovered) ? 1 : 0
                                 }}
+                                alt=""
                             />
                            : false
                         }
@@ -90,11 +92,15 @@ export const Cv = ({data}) => {
     const cvPanel = useRef();
     const cvContents = useRef();    
 
-    const lines = (() => {
-        let lines = [];
+    const calculateLines = () => {
+        let currentLines = [];
         data.years.forEach( ( yearData ) => {
             const yearLines = [];
             yearData.entries.forEach( (entry) => {
+                if( typeof window === 'undefined' ){
+                    yearLines.push( entry );
+                    return;
+                }
                 if( entry.hideon === "mobile" || entry.hideon === "desktop" ){
                     if(context.siteWidth < context.breakpoint && entry.hideon !== "mobile" ){
                         yearLines.push( entry );
@@ -105,15 +111,25 @@ export const Cv = ({data}) => {
                 } else {
                     yearLines.push( entry );
                 } 
-            });
-            yearLines.reverse();
-            lines = lines.concat( yearLines );
+            });            
+            currentLines = currentLines.concat( yearLines.reverse() );
         });       
-        return lines.reverse();
-    })();
+        return currentLines.reverse();
+    };
+    const [lines, setLines] = useState([]);
     const yearCount = data.years.length;
     const mobileGapCount = yearCount - 1;
     
+    
+    useEffect(() => {
+        const handleResizeWindow = () => setLines( calculateLines() );   
+        window.addEventListener( "resize", handleResizeWindow );
+        setLines( calculateLines() )
+        return () => {
+            window.removeEventListener( "resize", handleResizeWindow );
+        }
+    }, []);
+
     useLayoutEffect(() => {
         if( !oneRow.current ){ return }
         if( !cvPanel.current ){ return }
@@ -147,7 +163,7 @@ export const Cv = ({data}) => {
         offsetLineCount.current = offset;
 
         cvContents.current.style.transform = `translateY(-${offset * lineHeight.current}px)`;
-    }, [scrollAmount, lines] )
+    }, [scrollAmount] )
 
     return(
         <div 
@@ -169,14 +185,14 @@ export const Cv = ({data}) => {
                 className="cv-contents"
                 ref={cvContents}
             >
-               {lines.map( ( entry, i ) => {                   
+               {lines.map( ( entry, i ) => {
                     return (
                         <CvEntry                       
                             year={( (lines[i-1] && entry.year !== lines[i-1].year) || !lines[i-1]) ? entry.year : ''}
                             type={( (lines[i-1] && entry.type !== lines[i-1].type) || !lines[i-1]) ? entry.type : ''}
                             data={entry}
                             ref={oneRow}
-                            key={`${entry.type}-${entry.title}-${entry.situation}-${(entry.hideon === 'mobile') ? 'lrg' : 'norm'}`}
+                            key={entry.id}
                             inLowerThird={( i < (offsetLineCount.current + maxVisibleLines.current) && i > offsetLineCount.current + (maxVisibleLines.current*0.6) ) ? true : false }
                         />
                     )

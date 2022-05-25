@@ -8,7 +8,7 @@ import {Cv} from '../components/Cv'
 
 
 const TrackRecordPage = ({data}) => {
-  console.log( data );
+
     return (  
         <Layout
           navLink="/"
@@ -38,6 +38,7 @@ query DmstfctnCvQuery {
     years: group(field: year) {
       year: fieldValue
       entries: nodes {
+        id
         type
         year
         now
