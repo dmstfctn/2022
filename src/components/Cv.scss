@@ -1,19 +1,7 @@
 .dc-cv{
     flex-grow: 1;
     position: relative;
-    overflow: hidden;
-    &.unscrolled::after{
-        content: '↓';
-        text-align: center;
-        position: absolute;
-        bottom: 0;
-        height: 1.25rem;
-        background: black;
-        width: 100%;
-        display: block;
-        font-size: 0.65rem;
-        line-height: 0.8rem;
-    }
+    overflow: hidden;    
     .cv-contents{
         position: absolute;
         top: 0;
