@@ -166,7 +166,8 @@
             .dc-cv--entry > a{ 
                 width: auto;
                 pointer-events: none;
-                .dc-cv--linewrap::after{
+                .dc-cv--linewrap::after,
+                .svg-external-link{
                     display: none;
                 }
             }
