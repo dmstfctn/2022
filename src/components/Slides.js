@@ -1,9 +1,12 @@
-import React, {useState, useContext, useEffect} from "react"
+import React, {useState, useContext, useEffect, Children} from "react"
 import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
+
+import SvgBack from "../svg/back-arrow.svg"
+import SvgForward from "../svg/forward-arrow.svg"
 
 import { DmstfctnContext } from "../components/DmstfctnProvider"
 
-const SlideshowControl = ({text, className, onClick}) => {
+const SlideshowControl = ({text, className, onClick, children}) => {
     const [mousePos, setMousePos] = useState({x: 0, y: 0});
     return (
         <button 
@@ -24,6 +27,7 @@ const SlideshowControl = ({text, className, onClick}) => {
                 }}
             >
                 {text}
+                {children}
             </span>
     </button>
     )
@@ -57,13 +61,17 @@ export const Slides = ({
             <SlideshowControl
                 className="ctrl-prev"
                 onClick={() => onChange( -1 )}
-                text="prev"
-            />
+                text=""
+            >
+                <SvgBack />
+            </SlideshowControl>
             <SlideshowControl
                 className="ctrl-next"
                 onClick={() => onChange( 1 )}
-                text="next"
-            />            
+                text=""
+            >
+                <SvgForward />
+            </SlideshowControl>            
 
             <GatsbyImage 
                 className="current"

@@ -53,7 +53,10 @@
             pointer-events: none;
             display: none;    
             color: #FF0000;
-            
+            height: 1rem;
+            line-height: 0.7rem;
+            transform: translate(-50%, -50%);
+            width: 1.3rem;            
         }
 
         &:hover{
