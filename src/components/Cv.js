@@ -167,7 +167,7 @@ export const Cv = ({data}) => {
                             type={(lines[i-1] && entry.type !== lines[i-1].type || !lines[i-1]) ? entry.type : ''}
                             data={entry}
                             ref={oneRow}
-                            key={entry.name}
+                            key={`${entry.type}-${entry.title}-${entry.situation}-${(entry.hideon === 'mobile') ? 'lrg' : 'norm'}`}
                             inLowerThird={( i < (offsetLineCount.current + maxVisibleLines.current) && i > offsetLineCount.current + (maxVisibleLines.current*0.6) ) ? true : false }
                         />
                     )
