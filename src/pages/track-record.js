@@ -50,16 +50,7 @@ query DmstfctnCvQuery {
         location
         url
         image{
-          childImageSharp {
-            gatsbyImageData(
-              height: 800
-              placeholder: NONE
-              formats: [AUTO, WEBP, AVIF]
-              tracedSVGOptions: {
-                color: "#FF0000"
-              }
-            )
-          }
+          publicURL          
         }
         hideon
         priority
@@ -80,3 +71,11 @@ query DmstfctnCvQuery {
   }
 }
 `
+
+// childImageSharp {
+//   gatsbyImageData(
+//     width: 400
+//     placeholder: NONE
+//     formats: [AUTO, WEBP, AVIF]             
+//   )
+// }

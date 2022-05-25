@@ -51,12 +51,16 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
                             {(data.location) ? `, ${data.location}` : ''}
                         </div>
                         {(isHovered && data.image) ? 
-                            <GatsbyImage 
+                            // <GatsbyImage 
+                            //     className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
+                            //     image={ getImage( data.image ) }
+                            //     loading="eager"
+                            //     objectFit="contain"
+                            //     alt=""
+                            // />
+                            <img 
                                 className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
-                                image={ getImage( data.image ) }
-                                loading="eager"
-                                objectFit="contain"
-                                alt=""
+                                src={data.image.publicURL} 
                             />
                             : false
                         }

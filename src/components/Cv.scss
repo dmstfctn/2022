@@ -84,6 +84,9 @@
             position: absolute;
             top: 100%;
             left: 50%;
+            width: 44%;
+            max-height: 50vh;
+            object-fit: contain;
             transform: translateX(-50%);
             z-index: 20;
             pointer-events: none;    
