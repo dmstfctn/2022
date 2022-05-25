@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useLayoutEffect, useRef, useContext} from "react"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import SvgExternalLink from "../svg/external-link.svg"
 
 
 import { DmstfctnContext } from "./DmstfctnProvider"
@@ -50,6 +50,7 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
                             {data.situation}
                             {(data.location) ? `, ${data.location}` : ''}
                         </div>
+                        {(data.url) ? <SvgExternalLink className="svg-external-link"/> : false }
                         {(data.image) ? 
                             // <GatsbyImage 
                             //     className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
