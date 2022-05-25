@@ -24,6 +24,9 @@
             a{
                 color: #FF0000;
             }
+            .svg-external-link path{
+                fill: #FF0000;
+            }
         }
         .dc-cv--date,
         .dc-cv--type,
@@ -117,6 +120,9 @@
                 flex-shrink: 0;
                 padding-left: 0.2rem;
                 padding-top: .2rem;
+            }
+            &:hover .svg-external-link path{
+                fill: #FF0000;
             }
         }
         @media(max-width: 960px){
