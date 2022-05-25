@@ -22,7 +22,7 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
     
     return (
         <li 
-            className="cv-entry"
+            className={`cv-entry${(data.now) ? ' now' : ''}`}
             ref={ref}
         >            
             <span className={`dc-cv--date${(year) ? ' visible' : ' hidden'}`}>
