@@ -50,7 +50,7 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
                             {data.situation}
                             {(data.location) ? `, ${data.location}` : ''}
                         </div>
-                        {(isHovered && data.image) ? 
+                        {(data.image) ? 
                             // <GatsbyImage 
                             //     className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
                             //     image={ getImage( data.image ) }
@@ -61,8 +61,12 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
                             <img 
                                 className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
                                 src={data.image.publicURL} 
+                                loading="lazy"
+                                style={{
+                                    display: (isHovered) ? 'block' : 'none'
+                                }}
                             />
-                            : false
+                           : false
                         }
                     </span>
                 </ConditionalCvLink>
