@@ -14,7 +14,7 @@ export const Bio = ({large, small, mail, handle}) => {
                     <>
                         {small}
                         <br/>
-                        <a href={`mailto:${mail}`}>{mail}</a>, <a href={`https://instagram.com/${handle}`}>@{handle}</a>
+                        {mail}, @{handle}
                     </>
                 :
                     <>
