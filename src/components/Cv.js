@@ -78,7 +78,7 @@ export const Cv = ({data}) => {
     const [hasBeenScrolled, setHasBeenScrolled] = useState( false );
     const [alignImageAboveThresh, setAlignImageAboveThresh] = useState( 0 )
     const [offsetLineCount, setOffsetLineCount] = useState(0);
-    const maxVisibleLines = useRef( 0 );
+    const [maxVisibleLines, setMaxVisibleLines] = useState(0);
     const panelHeight = useRef( 0 );
     const lineHeight = useRef( 1 );
     const minmaxOffset = useRef({min: 0, max: 0});
@@ -116,7 +116,7 @@ export const Cv = ({data}) => {
     const mobileGapCount = yearCount - 1;
     
     const calculateImageAlignThreshold = () => {
-        setAlignImageAboveThresh( offsetLineCount + (maxVisibleLines.current*0.6) );
+        setAlignImageAboveThresh( offsetLineCount + (maxVisibleLines * 0.6) );
     }
 
     useEffect(() => {
@@ -137,11 +137,11 @@ export const Cv = ({data}) => {
         const totalLines = (context.siteWidth < context.breakpoint ) ? lines.length + mobileGapCount : lines.length;
         const maxOffset = totalLines - _maxVisible;
         const minOffset = 0;
-        maxVisibleLines.current = _maxVisible;
+        setMaxVisibleLines( _maxVisible );
         panelHeight.current = _panelHeight;
         lineHeight.current = _lineHeight;
         minmaxOffset.current = { min: minOffset, max: maxOffset };
-        minmaxScroll.current = {min: minOffset * _lineHeight, max: maxOffset * _lineHeight };    
+        minmaxScroll.current = {min: minOffset * _lineHeight, max: maxOffset * _lineHeight };  
     });
 
     useEffect(()=>{       
@@ -184,6 +184,11 @@ export const Cv = ({data}) => {
             }}
             ref={cvPanel}
         >
+            <div className="cv-cropper" style={{
+                height: maxVisibleLines * lineHeight.current + 'px',
+                overflow: 'hidden',
+                position: 'relative'
+            }}>
             <ul
                 className="cv-contents"
                 ref={cvContents}
@@ -200,7 +205,8 @@ export const Cv = ({data}) => {
                         />
                     )
                })}
-            </ul>          
+            </ul>      
+            </div>    
         </div>
     )
 }
