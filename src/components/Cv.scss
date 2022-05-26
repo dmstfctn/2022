@@ -97,23 +97,12 @@
                 top: auto;
                 bottom: 100%;
                 bottom: calc( 100% + 0.2rem );
-            }        
-        //     width: 100%;
-        //     height: 33vh;
-        //     img{
-        //         object-fit: contain;
-        //     }
+            }                
         }
         .dc-cv--entry > a{
             width: calc(100% + .35rem);
             display: block;
-            // .dc-cv--linewrap::after{
-            //     content: '↗';
-            //     display: inline;
-            //     font-size: 0.6em;
-            //     padding-left: 0.2rem;
-            //     line-height: 1.4em;
-            // }
+            text-decoration: none;            
             .svg-external-link{
                 width: .6rem;
                 height: .6rem;

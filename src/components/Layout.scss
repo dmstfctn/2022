@@ -51,9 +51,11 @@ sup{
 
 a{
     color: #FF0000;
-    text-decoration: none;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 1px;
     &:hover{
         color: #FF0000;
+        text-decoration: none;
     }
     @media (min-width: 960px){
         color: #000000;
