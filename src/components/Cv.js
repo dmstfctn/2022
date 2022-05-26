@@ -123,7 +123,6 @@ export const Cv = ({data}) => {
     const mobileGapCount = yearCount - 1;
     
     const calculateImageAlignThreshold = () => {
-        console.log( offsetLineCount, maxVisibleLines.current );
         setAlignImageAboveThresh( offsetLineCount + (maxVisibleLines.current*0.6) );
     }
 
@@ -174,7 +173,6 @@ export const Cv = ({data}) => {
     }, [scrollAmount] )
 
     useEffect(() =>{
-        console.log( 'calculateImageAlignThreshold()' );
         calculateImageAlignThreshold();
     })
 
