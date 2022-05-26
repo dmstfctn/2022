@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useLayoutEffect, useRef, useContext} from "react"
-import SvgExternalLink from "../svg/external-link.svg"
+import SvgExternalLink from "../svg/rightArrow.svg"
 
 
 import { DmstfctnContext } from "./DmstfctnProvider"

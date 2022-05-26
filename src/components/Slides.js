@@ -1,8 +1,8 @@
 import React, {useState, useContext, useEffect, Children} from "react"
 import { GatsbyImage, getImage, withArtDirection } from "gatsby-plugin-image"
 
-import SvgBack from "../svg/back-arrow.svg"
-import SvgForward from "../svg/forward-arrow.svg"
+import SvgBack from "../svg/leftArrow.svg"
+import SvgForward from "../svg/rightArrow.svg"
 
 import { DmstfctnContext } from "../components/DmstfctnProvider"
 
