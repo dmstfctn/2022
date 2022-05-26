@@ -96,6 +96,7 @@
             &.offset-top{
                 top: auto;
                 bottom: 100%;
+                bottom: calc( 100% + 0.2rem );
             }        
         //     width: 100%;
         //     height: 33vh;

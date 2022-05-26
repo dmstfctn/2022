@@ -14,7 +14,7 @@ const dots = (()=>{
     return str;
 })();
 
-const ConditionalCvLink = ({url, children }) => (url) ? <a href={url}>{children}</a> : children;
+const ConditionalCvLink = ({url, children }) => (url) ? <a href={url} target="_blank">{children}</a> : children;
 
 
 const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {

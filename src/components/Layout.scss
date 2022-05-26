@@ -112,4 +112,7 @@ body.page--track-record{
     justify-content: space-between; 
     flex-grow: 1;
     height: 100%;
+    @media (min-width: 960px){
+        margin-top: -0.3rem;
+    }      
 }
