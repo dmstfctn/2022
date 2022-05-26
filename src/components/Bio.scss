@@ -9,4 +9,12 @@
         text-align: center;
         text-align-last: center;
     }
+    @media(min-width: 960px){
+        height: 2rem; /*fixed height to hide the :after content*/
+        &:after{
+            /* forces safari to treat it as 2 lines so justify works even thopugh text-align-last is unsupported */
+            content: ' dmstfctn dmstfctn dmstfctn dmstfctn';
+            opacity: 0;
+        }   
+    }
 }
