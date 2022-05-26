@@ -1,54 +1,56 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+1.  **Gatsby**
 
-## 🚀 Quick start
+    The site's now built using [Gatsby](https://www.gatsbyjs.com/). This shouldn't change much in terms of updating it, but means things are differently organised vs. 2020.
 
-1.  **Create a Gatsby site.**
+2.  **Modifying**
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+    From the site’s directory run
 
     ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
-
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
-
-    ```shell
-    cd my-gatsby-site/
     npm run develop
     ```
 
-3.  **Open the code and start customizing!**
+    Becaus of Gatsby there's a lot more printed out, and more going on in the background. This should be fine, but may mean that deleting or renaming files needs a restart (i.e. CTRL+C then `npm run develop` again). Images may only be processed when they're needed so if you make a big change to the slideshow then it could take a few runs through.
 
-    Your site is now running at http://localhost:8000!
+    The content is in `/src`
 
-    Edit `src/pages/index.js` to see your site update in real-time!
+    **Slideshow**
+    The files for the slideshow are in `/src/showcase`
+    `/src/showcase/main` is the large site images
+    `/src/showcase/small` is the small site (portrait) images
+    `/src/showcase/meta.yaml` is the data. 
+    
+    This is an array of entries with `title` and `url` in, there should be one per image. There's nothing intelligent to link the data from here to the images - it's just based off of the file order.
 
-4.  **Learn more**
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+    **Track Record**
+    The files for the bio/cv ate in `src/track-record`
+    `/src/track-record/_bio.md` is the bio with 4 arguments:
+      - _mail:_ the email address
+      - _handle:_ the instagram handle
+      - _smallBio:_ the bio text for phone (i.e. London, Berlin)
+      - _largeBio:_ the bio text for desktop - ideally 1 line
 
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+    `/src/track-record/_cv.yaml` is the cv, same format as before. _related_, _priority_, _description_, and _longDescription_ still exist as they were there before, but don't do anything anymore.
 
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+    `/src/track-record/**.[jpg|png]` all the image files should be placed straight in here and referenced in `_cv.yaml` by their full filename and extension.
 
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+3.  **Viewing**
 
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+    The site runs at http://localhost:8000. 
 
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
+4.  **Pushing**
 
-## 🚀 Quick start (Gatsby Cloud)
+    Pushing changes up will trigger netlify's build as before. If a change doesn't appear it may be that the build stage is crashing. You can check this locally by running 
 
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
+    ```shell
+    npm run build
+    ```
 
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+    and then 
+
+     ```shell
+    npm run serve
+    ```
+
+    to either see the errors in the terminal, or view the built site at http://localhost:9000. 
