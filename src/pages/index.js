@@ -55,9 +55,6 @@ query DmstfctnShowcaseQuery{
           height: 2000
           placeholder: NONE
           formats: [AUTO, WEBP, AVIF]
-          tracedSVGOptions: {
-            color: "#FF0000"
-          }
         )
       }
       thumbImage: childImageSharp {
@@ -87,9 +84,6 @@ query DmstfctnShowcaseQuery{
           height: 1200
           placeholder: NONE
           formats: [AUTO, WEBP, AVIF]
-          tracedSVGOptions: {
-            color: "#FF0000"
-          }
         )
       }
     }
