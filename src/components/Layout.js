@@ -11,6 +11,7 @@ export const Layout = ({children, navLink}) => {
             <nav className="dc-nav">                
                 <Link 
                     to={navLink}
+                    state={{ prevPath: window.location.pathname }}
                 >
                     <h1>DMSTFCTN</h1>
                 </Link>
