@@ -80,6 +80,7 @@ a{
     flex-grow: 0;
     display: flex;
     justify-content: center;
+    margin-top: .5rem;
     h1{
         margin: 0.4rem 0;
         -webkit-user-select: none;
@@ -111,8 +112,5 @@ body.page--track-record{
     gap: 0;
     justify-content: space-between; 
     flex-grow: 1;
-    height: 100%;
-    @media (min-width: 960px){
-        margin-top: -0.3rem;
-    }      
+    height: 100%;        
 }
