@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect, useRef, useContext} from "react"
+import React, {useState, useEffect, useLayoutEffect, useRef, useContext, useCallback} from "react"
 import SvgExternalLink from "../svg/rightArrow.svg"
 
 
@@ -14,10 +14,10 @@ const dots = (()=>{
     return str;
 })();
 
-const ConditionalCvLink = ({url, children }) => (url) ? <a href={url} target="_blank">{children}</a> : children;
+const ConditionalCvLink = ({url, children }) => (url) ? <a href={url} target="_blank" rel="noreferrer" >{children}</a> : children;
 
 
-const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
+const CvEntry = React.forwardRef( ({data, year, type, inLowerThird, useImage }, ref) => {
     const [isHovered, setIsHovered] = useState(false);    
 
     return (
@@ -34,8 +34,8 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
             </span>
             <div 
                 className="dc-cv--entry"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                onMouseEnter={(useImage) ? () => setIsHovered(true) : () => {}}
+                onMouseLeave={(useImage) ? () => setIsHovered(false) : () => {}}
             >
                 <ConditionalCvLink url={data.url}>
                     <span className="dc-cv--linewrap">
@@ -51,7 +51,7 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
                             {(data.location) ? `, ${data.location}` : ''}
                         </div>
                         {(data.url) ? <SvgExternalLink className="svg-external-link"/> : false }
-                        {(data.image) ? 
+                        {(useImage && data.image) ? 
                             <img 
                                 className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
                                 src={data.image.publicURL} 
@@ -86,8 +86,13 @@ export const Cv = ({data}) => {
     const oneRow = useRef();
     const cvPanel = useRef();
     const cvContents = useRef();    
+    const cvCrop = useRef();
 
-    const calculateLines = () => {
+    const [lines, setLines] = useState([]);    
+    const mobileGapCount = useRef( data.years.length - 1 );
+
+
+    const calculateLines = useCallback(() => {
         let currentLines = [];
         data.years.forEach( ( yearData ) => {
             const yearLines = [];
@@ -110,23 +115,8 @@ export const Cv = ({data}) => {
             currentLines = currentLines.concat( yearLines.reverse() );
         });       
         return currentLines.reverse();
-    };
-    const [lines, setLines] = useState([]);
-    const yearCount = data.years.length;
-    const mobileGapCount = yearCount - 1;
-    
-    const calculateImageAlignThreshold = () => {
-        setAlignImageAboveThresh( offsetLineCount + (maxVisibleLines * 0.6) );
-    }
-
-    useEffect(() => {
-        const handleResizeWindow = () => setLines( calculateLines() );   
-        window.addEventListener( "resize", handleResizeWindow );
-        setLines( calculateLines() )
-        return () => {
-            window.removeEventListener( "resize", handleResizeWindow );
-        }
-    }, []);
+    }, [data, context] );
+     
 
     useEffect(() => {
         if( !oneRow.current ){ return }
@@ -134,15 +124,27 @@ export const Cv = ({data}) => {
         const _panelHeight = cvPanel.current.getBoundingClientRect().height;
         const _lineHeight = oneRow.current.getBoundingClientRect().height;
         const _maxVisible = Math.floor( _panelHeight / _lineHeight );
-        const totalLines = (context.siteWidth < context.breakpoint ) ? lines.length + mobileGapCount : lines.length;
+        const totalLines = (context.siteWidth < context.breakpoint ) ? lines.length + mobileGapCount.current : lines.length;
         const maxOffset = totalLines - _maxVisible;
         const minOffset = 0;
         setMaxVisibleLines( _maxVisible );
         panelHeight.current = _panelHeight;
         lineHeight.current = _lineHeight;
         minmaxOffset.current = { min: minOffset, max: maxOffset };
-        minmaxScroll.current = {min: minOffset * _lineHeight, max: maxOffset * _lineHeight };  
-    });
+        minmaxScroll.current = {min: minOffset * _lineHeight, max: maxOffset * _lineHeight };
+    }, [oneRow, cvPanel, lines, context]);
+
+    useEffect(() => {
+        const handleResizeWindow = () =>{
+            setLines( calculateLines() );                      
+        }
+        window.addEventListener( "resize", handleResizeWindow );
+        handleResizeWindow();
+        return () => {
+            window.removeEventListener( "resize", handleResizeWindow );
+        }
+    }, [calculateLines]);
+
 
     useEffect(()=>{       
         if( !cvContents.current ){ return } 
@@ -158,14 +160,15 @@ export const Cv = ({data}) => {
             setHasBeenScrolled( true );
         }
 
-        setOffsetLineCount( offset );
+        setOffsetLineCount( offset );      
 
         cvContents.current.style.transform = `translateY(-${offset * lineHeight.current}px)`;
-        // calculateImageAlignThreshold();
-    }, [scrollAmount] )
+        cvCrop.current.style.height =  maxVisibleLines * lineHeight.current + 1 + 'px';  
 
-    useEffect(() =>{
-        calculateImageAlignThreshold();
+    }, [scrollAmount, cvContents, cvCrop, context.siteWidth, maxVisibleLines] )
+
+    useEffect(() =>{        
+        setAlignImageAboveThresh( offsetLineCount + (maxVisibleLines * 0.6) );
     })
 
     return(
@@ -184,11 +187,13 @@ export const Cv = ({data}) => {
             }}
             ref={cvPanel}
         >
-            <div className="cv-cropper" style={{
-                height: maxVisibleLines * lineHeight.current + 'px',
-                overflow: 'hidden',
-                position: 'relative'
-            }}>
+            <div className="cv-cropper" 
+                ref={cvCrop}
+                style={{ 
+                    overflow: 'hidden',
+                    position: 'relative',
+                    height: '100%'
+                }}>
             <ul
                 className="cv-contents"
                 ref={cvContents}
@@ -202,6 +207,7 @@ export const Cv = ({data}) => {
                             ref={oneRow}
                             key={entry.id}
                             inLowerThird={(i > alignImageAboveThresh ) ? true : false }
+                            useImage={(context.siteWidth >= context.breakpoint )}
                         />
                     )
                })}
