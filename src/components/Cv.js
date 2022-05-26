@@ -52,13 +52,6 @@ const CvEntry = React.forwardRef( ({data, year, type, inLowerThird}, ref) => {
                         </div>
                         {(data.url) ? <SvgExternalLink className="svg-external-link"/> : false }
                         {(data.image) ? 
-                            // <GatsbyImage 
-                            //     className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
-                            //     image={ getImage( data.image ) }
-                            //     loading="eager"
-                            //     objectFit="contain"
-                            //     alt=""
-                            // />
                             <img 
                                 className={`dc-cv--img${(inLowerThird) ? ' offset-top' : ''}`}
                                 src={data.image.publicURL} 
@@ -148,8 +141,7 @@ export const Cv = ({data}) => {
         panelHeight.current = _panelHeight;
         lineHeight.current = _lineHeight;
         minmaxOffset.current = { min: minOffset, max: maxOffset };
-        minmaxScroll.current = {min: minOffset * _lineHeight, max: maxOffset * _lineHeight };
-        //calculateImageAlignThreshold();
+        minmaxScroll.current = {min: minOffset * _lineHeight, max: maxOffset * _lineHeight };    
     });
 
     useEffect(()=>{       
