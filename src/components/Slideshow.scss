@@ -64,7 +64,7 @@
                 opacity: 1;
             }
         }
-        @media (min-width: 960px){
+        @media (min-width: 960px) and (pointer: fine) {
             cursor: none;
             .ctrl-text{
                 display: block;
