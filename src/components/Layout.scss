@@ -105,8 +105,10 @@ body.page--track-record{
     color: #FFFFFF;
     a{
         color: #FFFFFF;
-        &:hover{
-            color: #FF0000;
+        @media (min-width: 960px){
+            &:hover{
+                color: #FF0000;
+            }
         }
     }
 }
