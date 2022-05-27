@@ -15,6 +15,7 @@
     The content is in `/src`
 
     **Slideshow**
+
     The files for the slideshow are in `/src/showcase`
     `/src/showcase/main` is the large site images
     `/src/showcase/small` is the small site (portrait) images
@@ -24,6 +25,7 @@
 
 
     **Track Record**
+    
     The files for the bio/cv ate in `src/track-record`
     `/src/track-record/_bio.md` is the bio with 4 arguments:
       - _mail:_ the email address
