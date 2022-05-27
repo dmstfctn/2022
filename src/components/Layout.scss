@@ -55,10 +55,13 @@ a{
     text-underline-offset: 1px;
     &:hover{
         color: #FF0000;
-        text-decoration: none;
+       
     }
     @media (min-width: 960px){
         color: #000000;
+        &:hover{
+            text-decoration: none;
+        }
     }
 }
 
