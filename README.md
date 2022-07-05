@@ -2,7 +2,16 @@
 
     The site's now built using [Gatsby](https://www.gatsbyjs.com/). This shouldn't change much in terms of updating it, but means things are differently organised vs. 2020.
 
-2.  **Modifying**
+3.  **Setup/Install**
+
+    Clone the repository and
+
+    ```shell
+    cd 2022
+    npm install
+    ```
+
+3.  **Modifying**
 
     From the site’s directory run
 
@@ -37,11 +46,11 @@
 
     `/src/track-record/**.[jpg|png]` all the image files should be placed straight in here and referenced in `_cv.yaml` by their full filename and extension.
 
-3.  **Viewing**
+4.  **Viewing**
 
     The site runs at http://localhost:8000. 
 
-4.  **Pushing**
+5.  **Pushing**
 
     Pushing changes up will trigger netlify's build as before. If a change doesn't appear it may be that the build stage is crashing. You can check this locally by running 
 
